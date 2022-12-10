@@ -1,29 +1,17 @@
-import React,{useEffect,useState} from 'react'
+import React from 'react'
+import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
+
+import Services from './components/getServices';
+import Clients from './components/getClients'
 
 const App = () => {
-  const [backendData, setBackednData] = useState([{}])
-
-  useEffect (() => {
-    fetch("/services").then(
-      response => response.json()
-    ) .then(
-      data=> {
-        setBackednData(data)
-      }
-    )
-  }, [])
-
   return (
-    <div>
-      {(typeof backendData.services === 'undefined') ? (
-        <p>Cargando...</p>
-      ) : (
-        backendData.services.map((service,i) => (
-          <p key={i}> {service.servicio}</p>
-        ))
-      )}
-      
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/servicios' actual element = { <Services/>}/>
+        <Route path='/clientes' actual element = { <Clients/>}/>
+      </Routes>
+    </Router>
   )
 }
 

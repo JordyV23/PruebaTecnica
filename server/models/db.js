@@ -50,9 +50,22 @@ const insertPaymentServices = async function (idCobro,idServicio,volumen) {
     }
 }
 
+const getPaymentService = async function (id) {
+    try {
+        let pool = await sql.connect(config);
+        let data = await pool.request()
+        .input("idCliente",sql.Int,id)
+        .execute("SpGetPaymentServiceById");
+        return data.recordsets;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
     getServices:getServices,
     getClients:getClients,
     insertClient:insertClient,
-    insertPaymentServices:insertPaymentServices
+    insertPaymentServices:insertPaymentServices,
+    getPaymentService,getPaymentService
 }

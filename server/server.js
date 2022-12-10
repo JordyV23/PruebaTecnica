@@ -23,5 +23,11 @@ app.post("/createServices", (req,res) => {
     db.insertPaymentServices(req.body.cobro,req.body.servicio,req.body.volumen);
 })
 
+app.post("/listPaymentService", (req,res) => {
+   db.getPaymentService(req.body.id).then((data) => {
+    res.json(data[0]);
+   })
+})
+
 
 app.listen('2323', () => {console.log("servidor en: http://localhost:2323")})
